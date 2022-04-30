@@ -1,7 +1,7 @@
 ; This is a basic correctness check for constant propagation.  BB2
 ; basic block should be eliminated.
 
-; RUN: opt < %s -load-pass-plugin %shlibdir/libLLVMlllvm.so -passes=3lvm-sccp -S | not grep BB2
+; RUN: opt < %s -load-pass-plugin %shlibdir/libLLVMlllvm.so -passes=lllvm-sccp -S | not grep BB2
 
 define i128 @test() {
 	%Cond = add i1 100, -100

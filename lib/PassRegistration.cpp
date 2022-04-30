@@ -1,3 +1,4 @@
+#include "optimizations/DeadCodeElimination.h"
 #include "optimizations/SparseConditionalConstantPropagation.h"
 #include "llvm/Passes/PassBuilder.h"
 #include <llvm/Passes/PassPlugin.h>
@@ -10,7 +11,10 @@ PassPluginLibraryInfo getPluginInfo() {
             PB.registerPipelineParsingCallback(
                 [](StringRef Name, FunctionPassManager &FPM,
                    ArrayRef<PassBuilder::PipelineElement>) {
-                  if (Name == "3lvm-sccp") {
+                  if (Name == "lllvm-dce") {
+                    FPM.addPass(DeadCodeEliminationPass());
+                    return true;
+                  } else if (Name == "lllvm-sccp") {
                     FPM.addPass(SparseConditionalConstantPropagationPass());
                     return true;
                   }

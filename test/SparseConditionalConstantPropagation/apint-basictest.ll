@@ -3,7 +3,7 @@
 
 ; copy pasted from LLVM repo
 
-; RUN: opt < %s -load-pass-plugin %shlibdir/libLLVMlllvm.so -passes=3lvm-sccp -S | not grep add
+; RUN: opt < %s -load-pass-plugin %shlibdir/libLLVMlllvm.so -passes=lllvm-sccp -S | not grep add
 
 define i128 @test(i1 %B) {
 	br i1 %B, label %BB1, label %BB2
