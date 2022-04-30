@@ -1,3 +1,4 @@
+#include "optimizations/CommonSubexpressionElimination.h"
 #include "optimizations/DeadCodeElimination.h"
 #include "optimizations/SparseConditionalConstantPropagation.h"
 #include "llvm/Passes/PassBuilder.h"
@@ -11,7 +12,10 @@ PassPluginLibraryInfo getPluginInfo() {
             PB.registerPipelineParsingCallback(
                 [](StringRef Name, FunctionPassManager &FPM,
                    ArrayRef<PassBuilder::PipelineElement>) {
-                  if (Name == "lllvm-dce") {
+                  if (Name == "lllvm-cse") {
+                    FPM.addPass(CommonSubexpressionEliminationPass());
+                    return true;
+                  } else if (Name == "lllvm-dce") {
                     FPM.addPass(DeadCodeEliminationPass());
                     return true;
                   } else if (Name == "lllvm-sccp") {
