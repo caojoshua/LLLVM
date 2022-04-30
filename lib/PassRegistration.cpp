@@ -1,3 +1,4 @@
+#include "analysis/DominatorTreeAnalysis.h"
 #include "optimizations/CommonSubexpressionElimination.h"
 #include "optimizations/DeadCodeElimination.h"
 #include "optimizations/SparseConditionalConstantPropagation.h"
@@ -21,8 +22,16 @@ PassPluginLibraryInfo getPluginInfo() {
                   } else if (Name == "lllvm-sccp") {
                     FPM.addPass(SparseConditionalConstantPropagationPass());
                     return true;
+                  } else if (Name == "lllvm-print-dom-tree") {
+                    FPM.addPass(lllvm::DominatorTreePrinterPass());
+                    return true;
                   }
                   return false;
+                });
+            PB.registerAnalysisRegistrationCallback(
+                [](FunctionAnalysisManager &FAM) {
+                  FAM.registerPass(
+                      [&] { return lllvm::DominatorTreeAnalysis(); });
                 });
           }};
 }

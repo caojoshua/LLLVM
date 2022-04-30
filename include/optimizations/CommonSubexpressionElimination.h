@@ -1,8 +1,10 @@
+#ifndef LLLVM_CSE
+#define LLLVM_CSE
+
 #include "llvm/Passes/PassBuilder.h"
 
 using namespace llvm;
 
-// New PM implementation
 struct CommonSubexpressionEliminationPass : PassInfoMixin<CommonSubexpressionEliminationPass> {
 
 public:
@@ -11,3 +13,5 @@ public:
 private:
   DenseMap<Instruction *, Instruction *> commonSubexpressions;
 };
+
+#endif // LLLVM_CSE
