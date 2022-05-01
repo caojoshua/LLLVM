@@ -63,7 +63,9 @@ SparseConditionalConstantPropagationPass::run(Function &F,
     }
     if (addAllSuccessorsToWorkList) {
       for (BasicBlock *successor : successors(BB->getTerminator())) {
-        BBWorkList.push_back(successor);
+        if (!BBExecutable.contains(successor)) {
+          BBWorkList.push_back(successor);
+        }
       }
     }
   }
@@ -82,7 +84,9 @@ SparseConditionalConstantPropagationPass::run(Function &F,
   // the phi with its one incoming value.
   auto BB = F.begin();
   while (BB != F.end()) {
-    if (BBExecutable.find(&*BB) == BBExecutable.end()) {
+    if (BBExecutable.contains(&*BB)) {
+      ++BB;
+    } else {
       for (auto successor : successors(BB->getTerminator())) {
         auto phis = successor->phis();
         auto phi = successor->phis().begin();
@@ -101,8 +105,6 @@ SparseConditionalConstantPropagationPass::run(Function &F,
         }
       }
       BB = BB->eraseFromParent();
-    } else {
-      ++BB;
     }
   }
 
