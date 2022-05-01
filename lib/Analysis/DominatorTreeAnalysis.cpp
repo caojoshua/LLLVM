@@ -2,7 +2,7 @@
 // Compiler Design and Implementation`. We should change this to use the faster,
 // more complex algorithm.
 
-#include "analysis/DominatorTreeAnalysis.h"
+#include "Analysis/DominatorTreeAnalysis.h"
 #include <llvm/Analysis/BasicAliasAnalysis.h>
 #include <llvm/IR/CFG.h>
 #include <llvm/IR/PassManager.h>

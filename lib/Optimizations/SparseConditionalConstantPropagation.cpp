@@ -6,7 +6,7 @@
 // tracks constant ranges and undefined values. The specifics can be found in
 // the `ValueLatticeElement` enum.
 
-#include "optimizations/SparseConditionalConstantPropagation.h"
+#include "Optimizations/SparseConditionalConstantPropagation.h"
 
 #include "llvm/IR/IRBuilder.h"
 

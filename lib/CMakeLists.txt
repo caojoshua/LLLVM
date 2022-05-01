@@ -1,6 +1,6 @@
 add_library(LLVMlllvm MODULE
   PassRegistration.cpp)
 
-add_subdirectory(analysis)
-add_subdirectory(optimizations)
-add_subdirectory(support)
+add_subdirectory(Analysis)
+add_subdirectory(Optimizations)
+add_subdirectory(Support)

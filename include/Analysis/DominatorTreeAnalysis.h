@@ -1,7 +1,7 @@
 #ifndef LLLVM_DOM_TREE_ANALYSIS
 #define LLLVM_DOM_TREE_ANALYSIS
 
-#include "support/DominatorTree.h"
+#include "Support/DominatorTree.h"
 #include "llvm/IR/PassManager.h"
 
 namespace lllvm {

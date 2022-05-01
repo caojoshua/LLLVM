@@ -10,8 +10,8 @@
 // of expressions. Our currently hashing logic is very incomplete right now, and
 // we currently only support checking binary operator Instructions.
 
-#include "optimizations/CommonSubexpressionElimination.h"
-#include "analysis/DominatorTreeAnalysis.h"
+#include "Optimizations/CommonSubexpressionElimination.h"
+#include "Analysis/DominatorTreeAnalysis.h"
 #include "llvm/ADT/DenseMapInfo.h"
 #include "llvm/ADT/Hashing.h"
 #include "llvm/IR/IRBuilder.h"

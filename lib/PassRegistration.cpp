@@ -1,7 +1,7 @@
-#include "analysis/DominatorTreeAnalysis.h"
-#include "optimizations/CommonSubexpressionElimination.h"
-#include "optimizations/DeadCodeElimination.h"
-#include "optimizations/SparseConditionalConstantPropagation.h"
+#include "Analysis/DominatorTreeAnalysis.h"
+#include "Optimizations/CommonSubexpressionElimination.h"
+#include "Optimizations/DeadCodeElimination.h"
+#include "Optimizations/SparseConditionalConstantPropagation.h"
 #include "llvm/Passes/PassBuilder.h"
 #include <llvm/Passes/PassPlugin.h>
 

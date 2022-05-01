@@ -1,6 +1,6 @@
 // Dead code elimination pass. Elimates all instructions that are unused.
 
-#include "optimizations/DeadCodeElimination.h"
+#include "Optimizations/DeadCodeElimination.h"
 
 #include "llvm/IR/IRBuilder.h"
 

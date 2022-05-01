@@ -1,4 +1,4 @@
-#include "support/DominatorTree.h"
+#include "Support/DominatorTree.h"
 
 namespace lllvm {
 

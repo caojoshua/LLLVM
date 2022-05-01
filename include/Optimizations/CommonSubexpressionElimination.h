@@ -1,7 +1,7 @@
 #ifndef LLLVM_CSE
 #define LLLVM_CSE
 
-#include "support/DominatorTree.h"
+#include "Support/DominatorTree.h"
 #include "llvm/ADT/ScopedHashTable.h"
 #include "llvm/Passes/PassBuilder.h"
 
