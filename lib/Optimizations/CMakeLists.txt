@@ -1,6 +1,7 @@
 target_sources(LLVMlllvm PRIVATE
   CommonSubexpressionElimination.cpp
   DeadCodeElimination.cpp
+  LICM.cpp
   SparseConditionalConstantPropagation.cpp
   )
 

@@ -1,6 +1,7 @@
 #include "Analysis/DominatorTreeAnalysis.h"
 #include "Optimizations/CommonSubexpressionElimination.h"
 #include "Optimizations/DeadCodeElimination.h"
+#include "Optimizations/LICM.h"
 #include "Optimizations/SparseConditionalConstantPropagation.h"
 #include "llvm/Passes/PassBuilder.h"
 #include <llvm/Passes/PassPlugin.h>
@@ -24,6 +25,15 @@ PassPluginLibraryInfo getPluginInfo() {
                     return true;
                   } else if (Name == "lllvm-print-dom-tree") {
                     FPM.addPass(lllvm::DominatorTreePrinterPass());
+                    return true;
+                  }
+                  return false;
+                });
+            PB.registerPipelineParsingCallback(
+                [](StringRef Name, LoopPassManager &LPM,
+                   ArrayRef<PassBuilder::PipelineElement>) {
+                  if (Name == "lllvm-licm") {
+                    LPM.addPass(LICMPass());
                     return true;
                   }
                   return false;
