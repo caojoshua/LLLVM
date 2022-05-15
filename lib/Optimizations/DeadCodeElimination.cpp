@@ -4,9 +4,9 @@
 
 #include "llvm/IR/IRBuilder.h"
 
-bool isEssentialInstruction(Instruction &I) {
+bool isEssentialInstruction(Instruction *I) {
   // Is this right?
-  return I.isTerminator() || I.mayHaveSideEffects();
+  return I->isTerminator() || I->mayHaveSideEffects();
 }
 
 llvm::PreservedAnalyses
@@ -14,7 +14,7 @@ DeadCodeEliminationPass::run(Function &F, FunctionAnalysisManager &) {
   // Add all essential instructions to `worklist`
   for (BasicBlock &BB : F) {
     for (Instruction &I : BB) {
-      if (I.isTerminator()) {
+      if (isEssentialInstruction(&I)) {
         worklist.insert(&I);
       }
     }
@@ -30,7 +30,10 @@ DeadCodeEliminationPass::run(Function &F, FunctionAnalysisManager &) {
     User *U = dyn_cast<User>(V);
     if (U) {
       for (auto operand = U->op_begin(); operand != U->op_end(); ++operand) {
-        worklist.insert(operand->get());
+        Instruction *I = dyn_cast<Instruction>(operand->get());
+        if (I && !isEssentialInstruction(I) && used.find(I) == used.end()) {
+          worklist.insert(operand->get());
+        }
       }
     }
   }

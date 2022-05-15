@@ -55,7 +55,7 @@ void LICMPass::add_preheader(Loop *L) {
 llvm::PreservedAnalyses LICMPass::run(Loop &L, LoopAnalysisManager &AM,
                                       LoopStandardAnalysisResults &AR,
                                       LPMUpdater &U) {
-  // First record all values defined in the loop
+  // Record all values defined in the loop
   for (auto iter = L.block_begin(); iter != L.block_end(); ++iter) {
     for (Instruction &I : **iter) {
       loopDefinedValues.insert(&I);
