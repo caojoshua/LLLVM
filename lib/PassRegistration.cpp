@@ -3,6 +3,7 @@
 #include "Optimizations/DeadCodeElimination.h"
 #include "Optimizations/LICM.h"
 #include "Optimizations/SparseConditionalConstantPropagation.h"
+#include "Optimizations/TailRecursionElimination.h"
 #include "llvm/Passes/PassBuilder.h"
 #include <llvm/Passes/PassPlugin.h>
 
@@ -22,6 +23,9 @@ PassPluginLibraryInfo getPluginInfo() {
                     return true;
                   } else if (Name == "lllvm-sccp") {
                     FPM.addPass(SparseConditionalConstantPropagationPass());
+                    return true;
+                  } else if (Name == "lllvm-tre") {
+                    FPM.addPass(TailRecursionEliminationPass());
                     return true;
                   } else if (Name == "lllvm-print-dom-tree") {
                     FPM.addPass(lllvm::DominatorTreePrinterPass());
