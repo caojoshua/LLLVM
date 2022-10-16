@@ -1,6 +1,7 @@
 #include "Analysis/DominatorTreeAnalysis.h"
 #include "Optimizations/CommonSubexpressionElimination.h"
 #include "Optimizations/DeadCodeElimination.h"
+#include "Optimizations/GVNPRE.h"
 #include "Optimizations/LICM.h"
 #include "Optimizations/SparseConditionalConstantPropagation.h"
 #include "Optimizations/TailRecursionElimination.h"
@@ -20,6 +21,9 @@ PassPluginLibraryInfo getPluginInfo() {
                     return true;
                   } else if (Name == "lllvm-dce") {
                     FPM.addPass(DeadCodeEliminationPass());
+                    return true;
+                  } else if (Name == "lllvm-gvnpre") {
+                    FPM.addPass(GVNPREPass());
                     return true;
                   } else if (Name == "lllvm-sccp") {
                     FPM.addPass(SparseConditionalConstantPropagationPass());
