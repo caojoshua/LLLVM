@@ -3,6 +3,7 @@ target_sources(LLVMlllvm PRIVATE
   DeadCodeElimination.cpp
   GVNPRE.cpp
   LICM.cpp
+  LoopUnswitching.cpp
   SparseConditionalConstantPropagation.cpp
   TailRecursionElimination.cpp
   )

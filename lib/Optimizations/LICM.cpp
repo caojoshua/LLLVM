@@ -5,6 +5,22 @@
 // 1. a constant
 // 2. defined outside of the loop
 // 3. loop-invariant
+//
+// TODO: operands must also only having one reaching definition (not a phi).
+// for i..N {
+//  var foo;
+//  if (cond) {
+//    foo = a;
+//  } else {
+//    foo = b;
+//  }
+//  print(foo);
+// }
+//
+// `foo` is not loop invariant and cannot be hoisted out of the outer loop. It
+// can be invariant if we can also prove `cond` is invariant, and hoist the
+// if-else. This can be covered by loop unswitching, if the cost of copying the
+// entire loop is not too expensive.
 
 #include "Optimizations/LICM.h"
 
@@ -90,7 +106,9 @@ llvm::PreservedAnalyses LICMPass::run(Loop &L, LoopAnalysisManager &AM,
       for (auto userIter = I->user_begin(); userIter != I->user_end();
            ++userIter) {
         Instruction *user = dyn_cast<Instruction>(*userIter);
-        worklist.insert(user);
+        if (!user->mayHaveSideEffects() && !user->isTerminator()) {
+          worklist.insert(user);
+        }
       }
     }
   }

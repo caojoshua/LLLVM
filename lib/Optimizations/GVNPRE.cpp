@@ -289,7 +289,6 @@ bool GVNPREPass::insert(lllvm::DominatorTree &DT, ExpressionFlowSets &available,
 
       // If expr does not need to be inserted in all predecessors, then it is
       // not fully nor partially redundant, and no insertions are required.
-      llvm::outs() << numInserts << "\n";
       if (numInserts < pred_size(BB)) {
         PHINode *phi = PHINode::Create(expr.second->getType(), num_preds, "",
                                        &BB->front());
@@ -380,11 +379,7 @@ llvm::PreservedAnalyses GVNPREPass::run(Function &F,
   ExpressionFlowSets anticipatable = getAnticipated(PDT);
 
   insert(DT, available, anticipatable);
-  /* llvm::outs() << "\n******after insert******\n\n"; */
-  /* F.print(llvm::outs()); */
   eliminate(F, available);
-  /* llvm::outs() << "\n******after eliminate******\n\n"; */
-  /* F.print(llvm::outs()); */
 
   return PreservedAnalyses::none();
 }

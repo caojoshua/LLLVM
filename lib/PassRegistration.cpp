@@ -3,6 +3,7 @@
 #include "Optimizations/DeadCodeElimination.h"
 #include "Optimizations/GVNPRE.h"
 #include "Optimizations/LICM.h"
+#include "Optimizations/LoopUnswitching.h"
 #include "Optimizations/SparseConditionalConstantPropagation.h"
 #include "Optimizations/TailRecursionElimination.h"
 #include "llvm/Passes/PassBuilder.h"
@@ -42,6 +43,9 @@ PassPluginLibraryInfo getPluginInfo() {
                    ArrayRef<PassBuilder::PipelineElement>) {
                   if (Name == "lllvm-licm") {
                     LPM.addPass(LICMPass());
+                    return true;
+                  } else if (Name == "lllvm-loop-unswitching") {
+                    LPM.addPass(LoopUnswitchingPass());
                     return true;
                   }
                   return false;
