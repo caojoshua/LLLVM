@@ -11,3 +11,6 @@ include_directories(${LLVM_INCLUDE_DIRS}, include)
 
 add_subdirectory(lib)
 add_subdirectory(test)
+
+include(CTest)
+add_test(NAME litTests COMMAND lit ${CMAKE_BINARY_DIR}/test)

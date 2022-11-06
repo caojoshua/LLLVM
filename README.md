@@ -34,5 +34,11 @@ From project root after building:
 lit build/test
 ```
 
+or run through CMake:
+
+```
+cmake --build build -- test
+```
+
 ## llvm-tutor
 Much of the build and test infrastructure is copied from [llvm-tutor](https://github.com/banach-space/llvm-tutor). It will probably stay this way until I feel like taking a deeper look into it.
