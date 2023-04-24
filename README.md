@@ -40,5 +40,19 @@ or run through CMake:
 cmake --build build -- test
 ```
 
+## Optimizations and Analysis
+LLLVM has implemenented the following optimizations (look in lib/Optimizations):
+* Common Subexpression Elimination
+* Dead Code Elimination
+* Global Value Numbering - Partial Redundancy Elimination
+* Loop Invariant Code Motion
+* Loop Unswitching
+* Loop Strength Reduction (really basic)
+* Sparse Conditional Constant Propagation (really basic)
+* Tail Recursion Elimination
+
+LLVM has implemented the following analysis (look in lib/Analysis)
+* Dominator Tree
+
 ## llvm-tutor
 Much of the build and test infrastructure is copied from [llvm-tutor](https://github.com/banach-space/llvm-tutor). It will probably stay this way until I feel like taking a deeper look into it.
